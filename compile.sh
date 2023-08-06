@@ -4,4 +4,4 @@ for file in ./metadata/*; do
     json="$json$(cat "$file")"
 done
 
-echo "$json" | jq -c -s '.' > metadata.json
+echo "$json" | jq -s -c '.' > metadata.json

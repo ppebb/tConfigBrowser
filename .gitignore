@@ -1,2 +1,4 @@
 mods/
 metadata.json
+node_modules/
+bin/
