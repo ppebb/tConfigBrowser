@@ -23,8 +23,8 @@ app.get("/allmods", function(_, res, _) {
     res.send(modsJson);
 });
 
-app.get("/mod", function(req, res, _) {
-    var mod = modsDict[req.query.modinfo];
+app.get("/modinfo", function(req, res, _) {
+    var mod = modsDict[req.query.name];
 
     if (mod == null) {
         res.send("error");
