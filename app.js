@@ -10,7 +10,7 @@ app.listen(4000);
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/mods", express.static(__dirname + "/mods"));
 
 var modsJson = fs.readFileSync("./metadata.json", "utf8");
 var modsArray = JSON.parse(modsJson);
