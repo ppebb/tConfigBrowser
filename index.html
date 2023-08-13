@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/png" href="./favicon.ico" />
+    <title>tConfig Browser</title>
+</head>
+
+<body>
+    <h1>tConfig Browser</h1>
+</body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        function otherTags(obj) {
+            var ret = "";
+
+            if (obj.author != null)
+                ret += `<h3>By: ${obj.author}</h3>`;
+
+            if (obj.desc != null)
+                ret += `<h3>${obj.desc}</h3>`;
+
+            if (obj.homepage != null)
+                ret += `<h3><a href="${obj.homepage}">Homepage</a></h3>`
+
+            return ret;
+        }
+
+        async function inner() {
+            var frag = document.createDocumentFragment();
+            var temp = document.createElement("div");
+
+            const json = await fetch("./allmods")
+                .then(r => r.json())
+                .then(r => {
+                    for (var i = 0; i < r.length; i++) {
+                        var obj = r[i];
+
+                        temp.innerHTML += `
+                            <hr />
+                            <div>
+                                <h2>${obj.name}</h2>
+                                ${otherTags(obj)}
+                                <h3><a href="./${obj.location}">Download</a></h3>
+                            </div>
+                        `;
+                    }
+                });
+
+            while(temp.firstChild) {
+                frag.appendChild(temp.firstChild);
+            }
+
+            document.body.appendChild(frag, document.body.childNodes[document.body.childNodes.length]);
+        }
+
+        inner();
+    })
+</script>
